@@ -1,2 +1,4 @@
 .DS_Store
 Mappe uden navn/
+node_modules/
+.netlify/

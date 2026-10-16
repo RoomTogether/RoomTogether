@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="Logo/roomtogether-logo.png" type="image/png">
   <title>Admin — RoomTogether</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,12 +16,12 @@
     boot('admin.html', () => {
     if (!requireLogin('admin.html')) return
     const me = sessionUser()
-    if (me.role !== 'admin' && me.email !== 'stefan@roomtogether.dk') {
-      document.getElementById('page').innerHTML = '<div class="empty">Kun administrator har adgang.</div>'
+    if (me.role !== 'admin') {
+      document.getElementById('page').innerHTML = '<div class="empty">Kun administrator har adgang. Sæt rollen <code>admin</code> under Identity → Users i Netlify.</div>'
     } else {
       const data = db()
       document.getElementById('page').innerHTML = `
-        <div class="page-head"><div><p class="eyebrow">Kun Stefan i starten</p><h1>Admin</h1></div>
+        <div class="page-head"><div><p class="eyebrow">Administrator</p><h1>Admin</h1></div>
           <button class="btn btn-ghost btn-sm" id="reset">Nulstil demo-data</button>
         </div>
         <div class="panel" style="margin-bottom:1rem">

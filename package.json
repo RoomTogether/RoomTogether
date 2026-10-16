@@ -1,0 +1,31 @@
+{
+  "name": "roomtogether",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild node_modules/@netlify/identity/dist/main.js --bundle --format=iife --global-name=NetlifyIdentity --outfile=Hjemmeside/js/netlify-identity.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RoomTogether/RoomTogether.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/RoomTogether/RoomTogether/issues"
+  },
+  "homepage": "https://github.com/RoomTogether/RoomTogether#readme",
+  "dependencies": {
+    "@netlify/identity": "^2.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

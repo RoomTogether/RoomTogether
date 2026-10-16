@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin.html
+Disallow: /profil.html
+Disallow: /profil2.html
+Disallow: /beskeder.html
+Disallow: /favoritter.html
+Disallow: /ansogere.html
+Disallow: /nyt-opslag.html
+Disallow: /glemt-kode.html
+
+Sitemap: https://roomtogether.dk/sitemap.xml

@@ -4,7 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RoomTogether — Find roommate i København</title>
+  <meta name="description" content="Find værelse og roommate i København. Match på hverdagsvaner, ikke kun husleje. Gratis at kigge — ærlig pris uden skjulte abonnementer.">
+  <link rel="canonical" href="https://roomtogether.dk/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="da_DK">
+  <meta property="og:title" content="RoomTogether — Find roommate i København">
+  <meta property="og:description" content="Find værelse og roommate i København. Match på hverdagsvaner, ikke kun husleje.">
+  <meta property="og:url" content="https://roomtogether.dk/">
+  <meta property="og:image" content="https://roomtogether.dk/Logo/roomtogether-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="Logo/roomtogether-logo.png" type="image/png">
   <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://roomtogether.dk/#organization",
+        "name": "RoomTogether ApS",
+        "url": "https://roomtogether.dk/",
+        "logo": "https://roomtogether.dk/Logo/roomtogether-logo.png",
+        "email": "kontakt@roomtogether.dk",
+        "telephone": "+45 70 20 30 40",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Ryesgade 3",
+          "addressLocality": "København",
+          "postalCode": "2200",
+          "addressCountry": "DK"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://roomtogether.dk/#website",
+        "url": "https://roomtogether.dk/",
+        "name": "RoomTogether",
+        "description": "Find roommate og værelse i København",
+        "publisher": { "@id": "https://roomtogether.dk/#organization" },
+        "inLanguage": "da-DK",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://roomtogether.dk/vaerelser.html?area={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://roomtogether.dk/#webpage",
+        "url": "https://roomtogether.dk/",
+        "name": "RoomTogether — Find roommate i København",
+        "isPartOf": { "@id": "https://roomtogether.dk/#website" },
+        "about": { "@id": "https://roomtogether.dk/#organization" },
+        "inLanguage": "da-DK"
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div id="site-nav"></div>
@@ -32,10 +88,10 @@
           <p class="proof" id="proof"></p>
         </div>
         <div class="collage" aria-hidden="true">
-          <img src="Billeder/pexels-cottonbro-4778612.jpg" alt="">
-          <img src="Billeder/pexels-cottonbro-5088439.jpg" alt="">
-          <img src="Billeder/pexels-vafphotos-14424558.jpg" alt="">
-          <img src="Billeder/pexels-cottonbro-5932729.jpg" alt="">
+          <img src="Billeder/pexels-cottonbro-4778612.jpg" alt="Fælles køkken i København" width="600" height="450" loading="eager">
+          <img src="Billeder/pexels-cottonbro-5088439.jpg" alt="Hyggeligt værelse" width="600" height="450" loading="lazy">
+          <img src="Billeder/pexels-vafphotos-14424558.jpg" alt="Altan i København" width="600" height="450" loading="lazy">
+          <img src="Billeder/pexels-cottonbro-5932729.jpg" alt="Gang i lejlighed" width="600" height="450" loading="lazy">
         </div>
       </div>
     </section>

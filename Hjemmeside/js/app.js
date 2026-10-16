@@ -472,7 +472,7 @@ function listingCard(listing, score) {
     </button>`
   return `<article class="listing">
     <div class="listing-media">
-      ${listing.image ? `<img src="${listing.image}" alt="" loading="lazy">` : ''}
+      ${listing.image ? `<img src="${listing.image}" alt="${listing.title || 'Ledigt værelse'}" loading="lazy" width="640" height="400">` : ''}
       <span class="badge ${avail.now ? 'badge-now' : ''}">${avail.label}</span>
       ${favBtn}
     </div>

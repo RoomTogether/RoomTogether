@@ -1,0 +1,22 @@
+# RoomTogether
+
+> Find roommate og værelse i København — match på hverdagsvaner, ikke kun husleje.
+
+RoomTogether er en dansk platform, der forbinder personer der søger værelse med personer der har et ledigt værelse i København.
+
+## Sider
+
+- [Forside](https://roomtogether.dk/): Oversigt og søgning
+- [Værelser](https://roomtogether.dk/vaerelser.html): Ledige værelser
+- [Opret profil](https://roomtogether.dk/opret.html): Opret lejer- eller udlejerprofil
+- [Kontakt](https://roomtogether.dk/kontakt.html): Firmaoplysninger og klage
+- [Privatlivspolitik](https://roomtogether.dk/privatliv.html)
+- [Brugervilkår](https://roomtogether.dk/vilkaar.html)
+- [Cookiepolitik](https://roomtogether.dk/cookies.html)
+
+## Kontakt
+
+- RoomTogether ApS
+- Ryesgade 3, 2200 København N
+- CVR 44 55 66 77
+- kontakt@roomtogether.dk
