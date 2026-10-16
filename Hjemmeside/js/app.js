@@ -157,7 +157,98 @@ function setSession(userId) {
   save(data)
 }
 
-function logout() {
+function loadIdentity() {
+  return new Promise(resolve => {
+    if (window.NetlifyIdentity) return resolve(window.NetlifyIdentity)
+    const s = document.createElement('script')
+    s.src = 'js/netlify-identity.js'
+    s.onload = () => resolve(window.NetlifyIdentity || null)
+    s.onerror = () => resolve(null)
+    document.head.appendChild(s)
+  })
+}
+
+function identityMeta(iu) {
+  return iu.user_metadata || iu.userMetadata || iu.metadata || {}
+}
+
+function identityRoles(iu) {
+  const app = iu.app_metadata || iu.appMetadata || {}
+  return app.roles || []
+}
+
+function ensureLocalUser(iu) {
+  const data = db()
+  const email = String(iu.email || '').toLowerCase()
+  const meta = identityMeta(iu)
+  const roles = identityRoles(iu)
+  let user = data.users.find(u => u.id === iu.id || u.email === email)
+  const role = roles.includes('admin') ? 'admin' : (meta.role === 'host' || meta.role === 'seeker' ? meta.role : (user && user.role) || 'seeker')
+  if (!user) {
+    user = {
+      id: iu.id,
+      name: meta.full_name || meta.name || email.split('@')[0],
+      email,
+      role,
+      habits: meta.habits || { sleep: 'Normal', clean: 'Normal', guests: 'Af og til', noise: 'Normal', smoke: 'Nej', pets: 'Ok med andres', social: 'Blandet' },
+      bio: meta.bio || '',
+      age: Number(meta.age) || 25,
+      work: meta.work || '',
+      budget: Number(meta.budget) || 0,
+      area: meta.area || 'Nørrebro',
+      moveIn: meta.moveIn || todayIso(),
+      photo: IMG.hallway
+    }
+    data.users.push(user)
+  } else {
+    user.id = iu.id
+    user.email = email
+    if (meta.full_name) user.name = meta.full_name
+    if (roles.includes('admin')) user.role = 'admin'
+    else if (meta.role === 'host' || meta.role === 'seeker') user.role = meta.role
+  }
+  data.sessionUserId = user.id
+  save(data)
+  return user
+}
+
+async function ensureAuth() {
+  const NI = await loadIdentity()
+  if (!NI) return null
+  try {
+    const result = await NI.handleAuthCallback()
+    if (result && result.type === 'recovery') {
+      if (!location.pathname.endsWith('glemt-kode.html')) {
+        location.href = 'glemt-kode.html?reset=1'
+        return null
+      }
+    }
+    if (result && result.type === 'confirmation') toast('E-mail bekræftet — du er logget ind')
+    if (result && result.type === 'invite') {
+      location.href = 'glemt-kode.html?invite=1'
+      return null
+    }
+    const iu = await NI.getUser()
+    if (!iu) {
+      setSession(null)
+      return null
+    }
+    return ensureLocalUser(iu)
+  } catch (e) {
+    return null
+  }
+}
+
+function boot(active, fn) {
+  ensureAuth().finally(() => {
+    renderNav(active)
+    if (typeof fn === 'function') fn()
+  })
+}
+
+async function logout() {
+  const NI = await loadIdentity()
+  try { if (NI) await NI.logout() } catch (e) {}
   setSession(null)
   location.href = 'index.html'
 }

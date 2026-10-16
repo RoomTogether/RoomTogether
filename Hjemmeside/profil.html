@@ -11,8 +11,8 @@
   <main class="wrap" style="padding:2rem 0 3rem" id="page"></main>
   <script src="js/app.js"></script>
   <script>
-    renderNav('profil.html')
-    if (!requireLogin('profil.html')) throw 0
+    boot('profil.html', () => {
+    if (!requireLogin('profil.html')) return
     const me = sessionUser()
     const data = db()
     const myListings = data.listings.filter(l => l.userId === me.id)
@@ -66,8 +66,9 @@
       d.users = d.users.filter(u => u.id !== me.id)
       d.sessionUserId = null
       save(d)
-      location.href = 'index.html'
+      logout()
     }
+    })
   </script>
 </body>
 </html>

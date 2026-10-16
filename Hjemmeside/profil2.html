@@ -11,8 +11,7 @@
   <main class="wrap" style="padding-bottom:3rem" id="page"></main>
   <script src="js/app.js"></script>
   <script>
-    renderNav('profil.html')
-
+    boot('profil.html', () => {
     const REVIEWS = {
       u3: [
         {
@@ -114,6 +113,7 @@
         location.href = 'beskeder.html?with=' + person.id
       }
     }
+    })
   </script>
 </body>
 </html>

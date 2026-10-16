@@ -11,7 +11,7 @@
   <main class="wrap" id="page" style="padding-bottom:2rem"></main>
   <script src="js/app.js"></script>
   <script>
-    renderNav('vaerelser.html')
+    boot('vaerelser.html', () => {
     const id = qs('id')
     const data = db()
     const listing = data.listings.find(l => l.id === id)
@@ -114,6 +114,7 @@
         toast('Tak — anmeldelsen er sendt')
       }
     }
+    })
   </script>
 </body>
 </html>

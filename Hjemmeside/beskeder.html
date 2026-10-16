@@ -24,8 +24,8 @@
   </main>
   <script src="js/app.js"></script>
   <script>
-    renderNav('beskeder.html')
-    if (!requireLogin('beskeder.html')) throw 0
+    boot('beskeder.html', () => {
+    if (!requireLogin('beskeder.html')) return
     const me = sessionUser()
     let withId = qs('with')
     const channel = new BroadcastChannel('roomtogether_chat')
@@ -97,6 +97,7 @@
     if (withId && withId === me.id) withId = null
     drawThreads()
     drawMsgs()
+    })
   </script>
 </body>
 </html>

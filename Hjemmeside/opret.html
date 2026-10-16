@@ -43,38 +43,45 @@
   </main>
   <script src="js/app.js"></script>
   <script>
-    renderNav('opret.html')
-    const form = document.getElementById('form')
-    AREAS.forEach(a => form.area.innerHTML += `<option>${a}</option>`)
-    document.getElementById('habits').innerHTML = habitSelects('h_', null)
-    const roleQ = qs('role')
-    if (roleQ === 'host' || roleQ === 'seeker') form.role.value = roleQ
+    boot('opret.html', () => {
+      const form = document.getElementById('form')
+      AREAS.forEach(a => form.area.innerHTML += `<option>${a}</option>`)
+      document.getElementById('habits').innerHTML = habitSelects('h_', null)
+      const roleQ = qs('role')
+      if (roleQ === 'host' || roleQ === 'seeker') form.role.value = roleQ
 
-    form.onsubmit = e => {
-      e.preventDefault()
-      const data = db()
-      const email = form.email.value.trim().toLowerCase()
-      if (data.users.some(u => u.email === email)) return toast('E-mail er allerede i brug')
-      const user = {
-        id: 'u' + Date.now(),
-        name: form.name.value.trim(),
-        email,
-        password: form.password.value,
-        role: form.role.value,
-        age: Number(form.age.value),
-        bio: form.bio.value.trim(),
-        work: form.work.value.trim(),
-        area: form.area.value,
-        budget: Number(form.budget.value || 0),
-        moveIn: form.moveIn.value,
-        habits: readHabits(form, 'h_')
+      form.onsubmit = async e => {
+        e.preventDefault()
+        const NI = await loadIdentity()
+        if (!NI) return toast('Identity er ikke tilgængelig her — deploy til Netlify')
+        const email = form.email.value.trim().toLowerCase()
+        const habits = readHabits(form, 'h_')
+        const meta = {
+          full_name: form.name.value.trim(),
+          role: form.role.value,
+          age: Number(form.age.value),
+          bio: form.bio.value.trim(),
+          work: form.work.value.trim(),
+          area: form.area.value,
+          budget: Number(form.budget.value || 0),
+          moveIn: form.moveIn.value,
+          habits
+        }
+        try {
+          const iu = await NI.signup(email, form.password.value, meta)
+          if (iu.emailVerified === false) {
+            toast('Tjek din e-mail for at bekræfte kontoen')
+            location.href = 'login.html'
+            return
+          }
+          const user = ensureLocalUser(iu)
+          toast('Konto oprettet')
+          location.href = user.role === 'host' ? 'nyt-opslag.html' : homeFor(user)
+        } catch (err) {
+          toast((err && err.message) || 'Kunne ikke oprette konto')
+        }
       }
-      data.users.push(user)
-      data.sessionUserId = user.id
-      save(data)
-      toast('Konto oprettet')
-      location.href = user.role === 'host' ? 'nyt-opslag.html' : homeFor(user)
-    }
+    })
   </script>
 </body>
 </html>

@@ -45,7 +45,7 @@
   </main>
   <script src="js/app.js"></script>
   <script>
-    renderNav('vaerelser.html')
+    boot('vaerelser.html', () => {
     const me0 = sessionUser()
     document.getElementById('host-cta').innerHTML = canList(me0)
       ? '<a class="btn btn-primary" href="nyt-opslag.html">Nyt opslag</a>'
@@ -101,6 +101,7 @@
     sortSel.addEventListener('change', draw)
     document.getElementById('clear').onclick = () => { f.reset(); draw() }
     draw()
+    })
   </script>
 </body>
 </html>

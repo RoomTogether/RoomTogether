@@ -11,8 +11,8 @@
   <main class="wrap" style="padding:2rem 0 3rem" id="page"></main>
   <script src="js/app.js"></script>
   <script>
-    renderNav('admin.html')
-    if (!requireLogin('admin.html')) throw 0
+    boot('admin.html', () => {
+    if (!requireLogin('admin.html')) return
     const me = sessionUser()
     if (me.role !== 'admin' && me.email !== 'stefan@roomtogether.dk') {
       document.getElementById('page').innerHTML = '<div class="empty">Kun administrator har adgang.</div>'
@@ -67,6 +67,7 @@
         location.href = 'index.html'
       }
     }
+    })
   </script>
 </body>
 </html>
