@@ -257,6 +257,14 @@ function renderNav(active) {
   renderFooter()
 }
 
+const FIRM = {
+  name: 'RoomTogether ApS',
+  address: 'Ryesgade 3, 2200 København N',
+  email: 'kontakt@roomtogether.dk',
+  phone: '+45 70 20 30 40',
+  cvr: '44 55 66 77'
+}
+
 function renderFooter() {
   if (document.querySelector('.footer')) return
   const footer = document.createElement('footer')
@@ -285,10 +293,23 @@ function renderFooter() {
         <a href="opret.html">Opret profil</a>
         <a href="glemt-kode.html">Glemt kodeord</a>
       </div>
+      <div>
+        <h4>Juridisk</h4>
+        <a href="privatliv.html">Privatlivspolitik</a>
+        <a href="cookies.html">Cookiepolitik</a>
+        <a href="vilkaar.html">Brugervilkår</a>
+        <a href="kontakt.html">Kontakt &amp; klage</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <p><strong>${FIRM.name}</strong></p>
+      <p>${FIRM.address}</p>
+      <p>CVR ${FIRM.cvr}</p>
+      <p><a href="mailto:${FIRM.email}">${FIRM.email}</a> · <a href="tel:${FIRM.phone.replace(/\s/g, '')}">${FIRM.phone}</a></p>
     </div>
     <div class="footer-bottom">
-      <span>© ${new Date().getFullYear()} RoomTogether · København</span>
-      <span>Demo: maja@demo.dk (udlejer) · niklas@demo.dk (lejer) · kode: demo123</span>
+      <span>© ${new Date().getFullYear()} ${FIRM.name}</span>
+      <span>Priser på RoomTogether er vejledende og angivet inkl. moms, hvor relevant.</span>
     </div>
   </div>`
   const scripts = document.querySelector('body > script')
