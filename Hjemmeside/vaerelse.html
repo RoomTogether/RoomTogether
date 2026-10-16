@@ -83,7 +83,18 @@
                 ? '<p class="hint">Du er udlejer — match vises, når du åbner en ansøgers profil.</p>'
                 : '<p class="hint">Log ind som lejer for at se, hvor godt I matcher.</p>'}
             <p class="eyebrow" style="margin-top:.5rem">Vaner i hjemmet</p>
-            <div class="habits">${HABIT_KEYS.map(([k,label]) => `<div class="habit ${me && isSeeker(me) && me.habits[k] === listing.habits[k] ? 'same' : ''}"><b>${label}</b>${listing.habits[k]}</div>`).join('')}</div>
+            <div class="habits">${HABIT_KEYS.map(([k, label]) => {
+              const theirs = listing.habits[k]
+              const mine = isSeeker(me) && me.habits ? me.habits[k] : null
+              const same = mine != null && mine === theirs
+              if (mine == null) return `<div class="habit"><b>${label}</b>${theirs}</div>`
+              return `<div class="habit ${same ? 'same' : ''}"><b>${label}</b>
+                <div class="habit-compare">
+                  <span><em>Dem</em><strong>${theirs}</strong></span>
+                  <span><em>Dig</em><strong>${mine}</strong></span>
+                </div>
+              </div>`
+            }).join('')}</div>
             <div class="detail-actions">${actions.join('')}</div>
           </aside>
         </div>

@@ -222,6 +222,14 @@ button, input, select, textarea {
   font-size: 0.9rem;
 }
 .habit b { display: block; opacity: 0.6; font-weight: 500; font-size: 0.78rem; }
+.habit-compare {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.35rem;
+  font-size: 0.88rem;
+}
+.habit-compare span { display: flex; justify-content: space-between; gap: 0.5rem; }
+.habit-compare em { font-style: normal; opacity: 0.55; font-size: 0.75rem; }
 
 .form {
   display: grid;
